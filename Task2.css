@@ -1,0 +1,63 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background: linear-gradient(to right, #87CEFA, #1E90FF); /* Gradient background with light and dark blue */
+}
+
+.todo-container {
+    background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white background */
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #333; /* Text color */
+}
+
+input {
+    padding: 8px;
+    width: 60%;
+    margin-right: 10px;
+}
+
+button {
+    padding: 8px;
+    cursor: pointer;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+ 
+
+.task-item.completed span {
+    text-decoration: line-through;
+}
+
+li {
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.delete-btn {
+    background-color: #ff6b6b;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.completed span {
+    text-decoration: line-through;
+}

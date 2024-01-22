@@ -1,0 +1,105 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="C:\Users\user\Desktop\Task2 Octanet\Task2.css">
+    <title>To-Do List</title>
+</head>
+<body>
+    <div class="todo-container">
+        <h1>To-Do List</h1>
+        <div>
+            <input type="text" id="taskInput" placeholder="Add a new task">
+            <button onclick="addTask()">Add Task</button>
+        </div>
+        <ul id="taskList"></ul>
+        <div>
+            <button onclick="clearAllTasks()">Clear All Tasks</button>
+        </div>
+    </div>
+
+    <script>
+        // Function to add a new task
+        function addTask() {
+            var taskInput = document.getElementById("taskInput");
+            var taskList = document.getElementById("taskList");
+
+            if (taskInput.value !== "") {
+                var li = document.createElement("li");
+                li.innerHTML = `
+                    <input type="checkbox" onclick="markTaskDone(this)">
+                    <span>${taskInput.value}</span>
+                    <button class="edit-btn" onclick="editTask(this)">Edit</button>
+                    <button class="delete-btn" onclick="deleteTask(this)">Delete</button>
+                `;
+                taskList.appendChild(li);
+                taskInput.value = "";
+                updateLocalStorage();
+            }
+        }
+
+        //new
+
+         function markTaskDone(checkbox) {
+            var taskText = checkbox.nextElementSibling;
+
+            // Toggle class for strikethrough style
+            taskText.classList.toggle("completed");
+
+            updateLocalStorage();
+        }
+
+
+        // Function to mark a task as done
+        function markTaskDone(checkbox) {
+            var taskText = checkbox.nextElementSibling;
+            taskText.style.textDecoration = checkbox.checked ? "line-through" : "none";
+            updateLocalStorage();
+        }
+
+        // Function to delete a task
+        function deleteTask(btn) {
+            var li = btn.parentNode;
+            li.parentNode.removeChild(li);
+            updateLocalStorage();
+        }
+
+        // Function to edit a task
+        function editTask(btn) {
+            var span = btn.previousElementSibling;
+            var newText = prompt("Edit task:", span.textContent);
+            if (newText !== null) {
+                span.textContent = newText;
+                updateLocalStorage();
+            }
+        }
+
+        // Function to clear all tasks
+        function clearAllTasks() {
+            var taskList = document.getElementById("taskList");
+            taskList.innerHTML = "";
+            updateLocalStorage();
+        }
+
+        // Function to update local storage
+        function updateLocalStorage() {
+            var taskList = document.getElementById("taskList").innerHTML;
+            localStorage.setItem("tasks", taskList);
+        }
+
+        // Load tasks from local storage on page load
+        window.onload = function () {
+            var taskList = document.getElementById("taskList");
+            taskList.innerHTML = localStorage.getItem("tasks") || "";
+        };
+    </script>
+
+    <link rel="stylesheet" href="styles.css">
+</body>
+</html>
+
+
+
